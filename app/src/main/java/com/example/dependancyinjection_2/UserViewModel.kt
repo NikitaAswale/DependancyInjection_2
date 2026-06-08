@@ -10,8 +10,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class UserViewModel @Inject constructor( userRepository: UserRepository) : ViewModel(){
-
     val character : Flow<PagingData<Result>> = userRepository.getPosts()
 
-
-    }
+}
