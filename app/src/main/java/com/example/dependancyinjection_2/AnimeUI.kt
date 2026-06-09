@@ -46,95 +46,111 @@ import coil.compose.AsyncImage
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AmineUI(viewModel: UserViewModel = hiltViewModel(), navController: NavController){
+fun AmineUI(viewModel: UserViewModel = hiltViewModel(), navController: NavController) {
 
     val character = viewModel.character.collectAsLazyPagingItems()
 
-    Scaffold(topBar = {
-        TopAppBar(
-            title = {
-                Row(modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceEvenly,
-                    verticalAlignment = Alignment.CenterVertically) {
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceEvenly,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
 
-                    Text("All",
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.White,
-                        modifier = Modifier
-                            .clip(RoundedCornerShape(20.dp))
-                            .background(color = Color.Blue)
-                            .padding(horizontal = 12.dp, vertical = 4.dp)
-                    )
+                        Text(
+                            "All",
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.White,
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(20.dp))
+                                .background(color = Color.Blue)
+                                .padding(horizontal = 12.dp, vertical = 4.dp)
+                        )
 
-                    Text("Humanoid",
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.Black,
-                        modifier = Modifier
-                            .clip(RoundedCornerShape(20.dp))
-                            .background(color = Color.LightGray)
-                            .padding(horizontal = 10.dp, vertical = 4.dp)
-                    )
+                        Text(
+                            "Humanoid",
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.Black,
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(20.dp))
+                                .background(color = Color.LightGray)
+                                .padding(horizontal = 10.dp, vertical = 4.dp)
+                        )
 
-                    Text("Alien",
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.Black,
-                        modifier = Modifier
-                            .clip(RoundedCornerShape(20.dp))
-                            .background(color = Color.LightGray)
-                            .padding(horizontal = 10.dp, vertical = 4.dp)
-                    )
+                        Text(
+                            "Alien",
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.Black,
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(20.dp))
+                                .background(color = Color.LightGray)
+                                .padding(horizontal = 10.dp, vertical = 4.dp)
+                        )
 
-                    Text("Unknown",
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.Black,
-                        modifier = Modifier
-                            .clip(RoundedCornerShape(20.dp))
-                            .background(color = Color.LightGray)
-                            .padding(horizontal = 10.dp, vertical = 4.dp)
-                    )
+                        Text(
+                            "Unknown",
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.Black,
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(20.dp))
+                                .background(color = Color.LightGray)
+                                .padding(horizontal = 10.dp, vertical = 4.dp)
+                        )
+                    }
                 }
-            }
-        )
-    },
+            )
+        },
         bottomBar = {
             BottomAppBar() {
-                Row(modifier = Modifier.fillMaxWidth(),
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceEvenly,
-                    verticalAlignment = Alignment.CenterVertically) {
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
 
-                    Icon(Icons.Outlined.Home, contentDescription = "",
+                    Icon(
+                        Icons.Outlined.Home, contentDescription = "",
                         modifier = Modifier.size(28.dp),
-                        tint = Color.DarkGray)
+                        tint = Color.DarkGray
+                    )
 
-                    Icon(Icons.Outlined.Info, contentDescription = "",
+                    Icon(
+                        Icons.Outlined.Info, contentDescription = "",
                         modifier = Modifier
                             .clip(CircleShape)
                             .background(color = Color(0xFF89CFF0))
                             .padding(8.dp)
-                            .size(28.dp)
-                        ,
-                        tint = Color.DarkGray)
+                            .size(28.dp),
+                        tint = Color.DarkGray
+                    )
 
-                    Icon(Icons.Outlined.Notifications, contentDescription = "",
+                    Icon(
+                        Icons.Outlined.Notifications, contentDescription = "",
                         modifier = Modifier.size(28.dp),
-                        tint = Color.DarkGray)
+                        tint = Color.DarkGray
+                    )
 
-                    Icon(Icons.Outlined.Person, contentDescription = "",
+                    Icon(
+                        Icons.Outlined.Person, contentDescription = "",
                         modifier = Modifier.size(28.dp),
-                        tint = Color.DarkGray)
+                        tint = Color.DarkGray
+                    )
                 }
             }
-        }) {
-        paddingValues ->
+        }) { paddingValues ->
 
-        LazyColumn(modifier = Modifier.fillMaxSize().padding(paddingValues)) {
+        LazyColumn(modifier = Modifier
+            .fillMaxSize()
+            .padding(paddingValues)) {
 
-            items(character.itemCount){
-                index ->
+            items(character.itemCount) { index ->
                 character[index]?.let {
                     UserList(character = it, navController)
                 }
@@ -150,40 +166,53 @@ fun UserList(character: Result, navController: NavController) {
 
     Column(modifier = Modifier.fillMaxSize()) {
 
-        Card(modifier = Modifier.fillMaxWidth()
-            .padding(16.dp),
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
             elevation = CardDefaults.cardElevation(4.dp),
-            colors = CardDefaults.cardColors(containerColor = Color.White)) {
+            colors = CardDefaults.cardColors(containerColor = Color.White)
+        ) {
 
-            Row(modifier = Modifier.fillMaxWidth()
-                .padding(14.dp),
-                verticalAlignment = Alignment.CenterVertically) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(14.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
 
-                AsyncImage(model = character.image, contentDescription = "",
+                AsyncImage(
+                    model = character.image, contentDescription = "",
                     modifier = Modifier
                         .clip(RoundedCornerShape(12.dp))
                         .background(Color.Black)
                         .size(100.dp)
                 )
 
-                Column(modifier = Modifier.weight(1f)
-                    .padding(start = 10.dp),
+                Column(
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(start = 10.dp),
                     horizontalAlignment = Alignment.Start,
-                    verticalArrangement = Arrangement.SpaceEvenly) {
+                    verticalArrangement = Arrangement.SpaceEvenly
+                ) {
 
-                    Text("${character.name}",
+                    Text(
+                        "${character.name}",
                         fontSize = 20.sp,
                         fontWeight = FontWeight.Bold,
                         color = Color.Black,
-                        modifier = Modifier.clickable{
+                        modifier = Modifier.clickable {
                             val type = character.type.ifEmpty { "unknown" }
                             navController.navigate("Screen2/${character.name}/${character.species}/$type/${character.id}")
                         }
                     )
 
-                    Row(modifier = Modifier.fillMaxWidth(),
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.Start,
-                        verticalAlignment = Alignment.CenterVertically) {
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
                         Text(
                             "${character.species}",
                             fontSize = 16.sp,
@@ -209,11 +238,14 @@ fun UserList(character: Result, navController: NavController) {
                         )
                     }
 
-                    Row(modifier = Modifier.fillMaxWidth(),
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.Start,
-                        verticalAlignment = Alignment.CenterVertically) {
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
 
-                        Text( text = ".",
+                        Text(
+                            text = ".",
                             modifier = Modifier
                                 .clip(CircleShape)
                                 .size(8.dp)
@@ -222,14 +254,16 @@ fun UserList(character: Result, navController: NavController) {
 
                         Spacer(modifier = Modifier.width(10.dp))
 
-                        Text("Status: ",
+                        Text(
+                            "Status: ",
                             fontSize = 16.sp,
                             fontWeight = FontWeight.Normal,
                             color = Color.Gray
                         )
 
 
-                        Text("${character.status} ",
+                        Text(
+                            "${character.status} ",
                             fontSize = 16.sp,
                             fontWeight = FontWeight.Normal,
                             color = Color.Gray
