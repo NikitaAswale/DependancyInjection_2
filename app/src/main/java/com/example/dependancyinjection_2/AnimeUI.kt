@@ -227,7 +227,7 @@ fun UserList(character: Result, navController: NavController) {
                         Spacer(modifier = Modifier.width(10.dp))
 
                         Text(
-                            "${character.type}",
+                            character.type,
                             fontSize = 16.sp,
                             fontWeight = FontWeight.Normal,
                             color = Color.Black,
